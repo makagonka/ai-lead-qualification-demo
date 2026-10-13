@@ -1,0 +1,15 @@
+services:
+  demo:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEMO_MODE: ${DEMO_MODE:-offline}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      DEMO_DB_PATH: /service/data/demo.sqlite3
+    volumes:
+      - demo_data:/service/data
+    restart: unless-stopped
+volumes:
+  demo_data:
